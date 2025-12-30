@@ -21,17 +21,3 @@ Type a question related to the uploaded document.
 Click "Get Answer" to see the most relevant sentence(s) from the document.
 
 
-## File Structure
-
-graphql
-Copy code
-├── app.py                  # Main Gradio application
-├── requirements.txt        # Python dependencies
-├── models/                 # Pre-downloaded SentenceTransformer model
-├── README.md               # Project documentation
-└── sample_docs/            # Optional folder with example text or PDF files
-
-
-numpy
-
-PyPDF2 (for PDF support)
