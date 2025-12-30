@@ -12,7 +12,7 @@ A simple and lightweight chatbot that can answer questions from a text or PDF do
 - **Cross-platform compatibility** – Works on local machines, Kaggle, or Hugging Face Spaces.
 
 
-##Usage
+## Usage
 
 Upload a text or PDF file in the interface.
 
@@ -21,7 +21,7 @@ Type a question related to the uploaded document.
 Click "Get Answer" to see the most relevant sentence(s) from the document.
 
 
-##File Structure
+## File Structure
 
 graphql
 Copy code
