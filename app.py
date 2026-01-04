@@ -8,18 +8,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 import gradio as gr
 import PyPDF2
 
-# -------------------------------
 # Force CPU & offline mode
-# -------------------------------
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 torch.set_default_device("cpu")
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
 os.environ["HF_HUB_OFFLINE"] = "1"
 
-# -------------------------------
 # Load offline SentenceTransformer
-# -------------------------------
-MODEL_PATH = "all-MiniLM-L6-v2"  # Put your offline model folder here
+MODEL_PATH = "all-MiniLM-L6-v2"  # MY offline model folder here
 
 word_embedding_model = models.Transformer(MODEL_PATH)
 pooling_model = models.Pooling(
@@ -27,11 +23,9 @@ pooling_model = models.Pooling(
     pooling_mode_mean_tokens=True
 )
 embedder = SentenceTransformer(modules=[word_embedding_model, pooling_model], device="cpu")
-print("Model loaded successfully ✅")
+print("Model loaded successfully ")
 
-# -------------------------------
 # Helper functions
-# -------------------------------
 def split_text(text, chunk_size=500, overlap=50):
     chunks = []
     start = 0
@@ -48,17 +42,13 @@ def split_into_sentences(text):
 def embed_texts(texts):
     return embedder.encode(texts, convert_to_numpy=True)
 
-# -------------------------------
 # Global variables
-# -------------------------------
 all_sentences = []
 sentence_embeddings = None
 all_chunks = []
 chunk_embeddings = None
 
-# -------------------------------
 # File processing
-# -------------------------------
 def process_file(file):
     global all_sentences, sentence_embeddings, all_chunks, chunk_embeddings
     
@@ -88,9 +78,7 @@ def process_file(file):
     
     return f"File processed ✅ Total chunks: {len(all_chunks)}, Total sentences: {len(all_sentences)}"
 
-# -------------------------------
 # Query function (top 3)
-# -------------------------------
 def retrieve_answer(query, top_k=3):
     if chunk_embeddings is None or sentence_embeddings is None:
         return "Upload a file first!"
@@ -121,9 +109,8 @@ def retrieve_answer(query, top_k=3):
     
     return "\n\n".join(results)
 
-# -------------------------------
+
 # Gradio Interface
-# -------------------------------
 with gr.Blocks() as demo:
     gr.Markdown("<h1 style='text-align:center'>📄 Rayhan's Mini NLP Chatbot</h1>", elem_id="header")
     gr.Markdown(
